@@ -1,0 +1,61 @@
+.avatar-big {
+    height: 150px;
+}
+
+.info-section {
+    background-color: #C0CAD8;
+    line-height: 1.3;
+    z-index: 1;
+}
+
+.info-section-bio {
+    opacity: 0.7;
+}
+
+#message-list {
+    height: 370px;
+    overflow-y: scroll;
+}
+
+#message-list::-webkit-scrollbar {
+    width: 0.65rem;
+}
+
+#message-list::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #C0CBD8;
+    margin-top: 1rem;
+}
+
+#message-list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #9FAAB8;
+}
+
+.msg-container {
+    min-width: 75%;
+}
+
+.msg-in-info {
+    background-color: #C0CBD8;
+}
+
+.msg-out-info {
+    background-color: #EACCB6;
+}
+
+.msg-username {
+    opacity: 0.7;
+}
+
+.msg-timestamp {
+    opacity: 0.4;
+}
+
+.msg-seen-timestamp {
+    opacity: 0.3;
+}
+
+.msg-content {
+    background-color: #F5F8FB;
+}

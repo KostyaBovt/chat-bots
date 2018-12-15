@@ -1,6 +1,7 @@
-export class ChatUser {
+export interface User {
     id: number;
     avatar: string;
     name: string;
+    bio: string;
     isOnline: boolean;
 }

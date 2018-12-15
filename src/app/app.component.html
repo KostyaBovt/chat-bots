@@ -9,7 +9,14 @@
 <div class="row no-gutters main-section">
     <div class="col">
 
-        <app-chat-main class="my-3 p-0 d-flex container chat-main"></app-chat-main>
+        <div class="my-3 p-0 d-flex container chat-main">
+            <div class="flex-shrink-1 row no-gutters">
+    
+                <app-conversation-window class="col d-flex flex-column chat-window"></app-conversation-window>
+                <app-chat-nav class="col-3 border d-flex flex-column justify-content-start"></app-chat-nav>
+            
+            </div>
+        </div>
             
     </div>
 </div>

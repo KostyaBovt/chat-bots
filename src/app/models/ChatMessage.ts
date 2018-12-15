@@ -1,8 +1,7 @@
-export class ChatMessageIn {
+export interface ChatMessage {
     id: number;
     authorId: number;
     targetId: number;
-    authorName: string;
     dateSent: Date;
     dateSeen: Date;
     content: string;

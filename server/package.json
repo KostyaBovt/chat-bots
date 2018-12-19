@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "goby": "^1.1.2",
+    "mongoose": "^5.4.0",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {

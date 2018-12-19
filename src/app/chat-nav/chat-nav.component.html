@@ -1,68 +1,52 @@
 
 <div class="row text-center no-gutters flex-shrink-0">
     <div class="col">
-        <button class="filter-btn selected">
+        <button
+            class="filter-btn online"
+            [class.selected]="showOnline"
+            (click)="setShowOnline(true)">
             <small>Online</small>
         </button>
     </div>
     <div class="col">
-        <button class="filter-btn">
+        <button
+            class="filter-btn all"
+            [class.selected]="!showOnline"
+            (click)="setShowOnline(false)">
             <small>All</small>
         </button>
     </div>
 </div>
 
 <ul id="contact-list" class="m-0 list-unstyled flex-shrink-1 flex-grow-1">
-    <li class="media conversation-prev px-3 py-2">
+
+    <li
+        class="media conversation-prev px-3 py-2"
+        (click)="conversationOnClick(conv)"
+        *ngFor="let conv of conversationsToShow()"
+        [class.selected]="selectedConversation && conv.user.id === selectedConversation.user.id"
+        [class.unseen]="!isConversationSeenBySelf(conv)">
+
         <div class="mr-3 align-self-start avatar-thumb-container">
-            <img class="avatar-thumb rounded" src="https://avatars0.githubusercontent.com/u/34379301?s=460&v=4" alt="Generic placeholder image">
-            <div class="avatar-thumb-circle"></div>
+            <img class="avatar-thumb rounded" src="{{ conv.user.avatar }}" alt="avatar">
+            <div class="avatar-thumb-circle" *ngIf="conv.user.isOnline"></div>
         </div>
+
         <div class="media-body">
-            <h6 class="m-0">Echo bot</h6>
-            <div class="msg-prev">
-                <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin</small>
+            <h6 class="m-0">{{ conv.user.name }}</h6>
+            <div class="msg-prev" *ngIf="conv.messages.length > 0">
+                <small>{{ getLastMessage(conv).content }}</small>
             </div>
         </div>
+
     </li>
-    <li class="media conversation-prev selected px-3 py-2">
-        <div class="mr-3 align-self-start avatar-thumb-container">
-            <img class="avatar-thumb rounded" src="https://avatars0.githubusercontent.com/u/34379301?s=460&v=4" alt="Generic placeholder image">
-            <div class="avatar-thumb-circle"></div>
-        </div>
-        <div class="media-body">
-            <h6 class="m-0">Reverse bot</h6>
-            <div class="msg-prev">
-                <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin</small>
-            </div>
-        </div>
-    </li>
-    <li class="media conversation-prev px-3 py-2">
-        <div class="mr-3 align-self-start avatar-thumb-container">
-            <img class="avatar-thumb rounded" src="https://avatars0.githubusercontent.com/u/34379301?s=460&v=4" alt="Generic placeholder image">
-            <div class="avatar-thumb-circle"></div>
-        </div>
-        <div class="media-body">
-            <h6 class="m-0">Spam bot</h6>
-            <div class="msg-prev">
-                <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin</small>
-            </div>
-        </div>
-    </li>
-    <li class="media conversation-prev px-3 py-2">
-        <div class="mr-3 align-self-start avatar-thumb-container">
-            <img class="avatar-thumb rounded" src="https://avatars0.githubusercontent.com/u/34379301?s=460&v=4" alt="Generic placeholder image">
-            <div class="avatar-thumb-circle"></div>
-        </div>
-        <div class="media-body">
-            <h6 class="m-0">Ignore bot</h6>
-            <div class="msg-prev">
-                <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin</small>
-            </div>
-        </div>
-    </li>
+
 </ul>
 
 <div class="p-3 mt-auto flex-shrink-0">
-    <input class="form-control" type="text" placeholder="Search...">
+    <input
+        (keyup)="search($event.target.value)"
+        class="form-control"
+        type="text"
+        placeholder="Search...">
 </div>

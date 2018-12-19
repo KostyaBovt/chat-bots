@@ -25,6 +25,7 @@
     border-radius: 8px;
     background-color: #C0CBD8;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #message-list::-webkit-scrollbar-thumb {
@@ -32,30 +33,22 @@
     background-color: #9FAAB8;
 }
 
-.msg-container {
-    min-width: 75%;
-}
-
-.msg-in-info {
-    background-color: #C0CBD8;
-}
-
-.msg-out-info {
-    background-color: #EACCB6;
-}
-
-.msg-username {
-    opacity: 0.7;
-}
-
-.msg-timestamp {
-    opacity: 0.4;
+.msg-seen-container {
+    margin-top: -1.3rem;
 }
 
 .msg-seen-timestamp {
+    width: 75%;
     opacity: 0.3;
 }
 
-.msg-content {
-    background-color: #F5F8FB;
+.is-typing-container {
+    position: relative;
+}
+
+.is-typing-text {
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    bottom: 0%;
 }

@@ -1,28 +1,19 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http, {
-    pingInterval: 10000,
-    pingTimeout: 5000
+
+mongoose.set('useCreateIndex', true)
+mongoose.set('debug', true);
+mongoose.connect('mongodb://localhost/chat_bots', { useNewUrlParser: true })
+
+require('./models/User');
+require('./models/Message');
+
+require('./socketServer').init(http);
+
+
+const server = http.listen(process.env.PORT || 3000, () => {
+    console.log('Server listening on port ' + server.address().port);
 });
-
-io.on('connection', socket => {
-    console.log('New connection, assigning identity...');
-
-    socket.emit('new message', 'Successfully connected to server!');
-    socket.emit('user typing', 1);
-    socket.emit('new user connected', {
-        id: 1,
-        avatar: 'string',
-        name: 'string',
-        bio: 'string',
-        isOnline: true,
-    });
-    socket.emit('user disconnected', 1);
-
-});
-
-http.listen(3000, () => {
-    console.log('Server started at port 3000');
-})

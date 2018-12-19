@@ -1,0 +1,20 @@
+<div class="msg-container">
+    <div class="shadow-sm d-flex flex-column rounded" style="overflow:hidden">
+        <div
+            class="msg-out-info d-flex justify-content-between py-2 px-3"
+            [class.msg-out-info]="!msg.isIncoming"
+            [class.msg-in-info]="msg.isIncoming">
+            <span class="msg-username">
+              {{ msg.authorName }}
+            </span>
+            <span class="msg-timestamp ml-3">
+                <small>
+                  {{ msg.dateSent | date:'shortTime' }}
+                </small>
+            </span>
+        </div>
+        <div class="msg-content py-2 px-3">
+          {{ msg.content }}
+        </div>
+    </div>
+</div>

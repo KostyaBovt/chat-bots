@@ -1,7 +1,9 @@
 export interface ChatMessage {
     id: number;
-    authorId: number;
-    targetId: number;
+    authorId: string;
+    targetId: string;
+    authorName: string;
+    isIncoming: boolean;
     dateSent: Date;
     dateSeen: Date;
     content: string;

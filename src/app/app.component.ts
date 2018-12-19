@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from './services/chat.service';
+
+
+import { Conversation } from './models/Conversation';
+import { ConversationService } from './services/conversation.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,16 +12,16 @@ import { ChatService } from './services/chat.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Chat Bots 2.0';
+  selectedConversation: Conversation = null;
 
   constructor(
-    private _chatService: ChatService
+    private conversationService: ConversationService
   ) { }
 
   ngOnInit() {
-    this._chatService.userConnectedEvents.subscribe(user => console.log('user connected', user));
-    this._chatService.userDisconnectedEvents.subscribe(userId => console.log('user disconnected', userId));
-    this._chatService.typingEvents.subscribe(userId => console.log('user is typing', userId));
-    this._chatService.messages.subscribe(msg => console.log('new message', msg));
+    this.conversationService.getSelectedConversation()
+      .subscribe(conv => {
+        this.selectedConversation = conv;
+      }); 
   }
 }

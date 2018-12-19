@@ -1,7 +1,7 @@
 <div class="media flex-shrink-0 shadow-sm info-section">
-    <img class="avatar-big align-self-start" src="https://avatars0.githubusercontent.com/u/34379301?s=460&v=4" alt="Generic placeholder image">
+    <img class="avatar-big align-self-start" src="{{ selectedConversation.user.avatar }}" alt="avatar">
     <div class="media-body mx-3 mt-3">
-        <h5 class="mb-0">Reverse bot</h5>
+        <h5 class="mb-0">{{ selectedConversation.user.name }}</h5>
         <div class="info-section-bio">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         </div>
@@ -10,65 +10,45 @@
 
 <div id="message-list" class="py-3 px-2 mx-2 flex-grow-1">
     <ul class="list-unstyled m-0">
-        <li class="mb-4">
-            <div class="d-flex">
-                <div class="msg-container">
-                    <div class="shadow-sm d-flex flex-column rounded" style="overflow:hidden">
-                        <div class="msg-in-info d-flex justify-content-between py-2 px-3">
-                            <span class="msg-username">
-                                Username
-                            </span>
-                            <span class="msg-timestamp ml-3">
-                                <small>
-                                    4:27 PM
-                                </small>
-                            </span>
-                        </div>
-                        <div class="msg-content py-2 px-3">
-                            Hello world!
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <li class="mb-4" *ngFor="let msg of selectedConversation.messages">
+            <app-message
+                class="d-flex"
+                [class.justify-content-end]="!msg.isIncoming"
+                [msg]="msg">
+
+            </app-message>
         </li>
-        <li class="mb-4">
-            <div class="d-flex justify-content-end">
-                <div class="msg-container">
-                    <div class="shadow-sm d-flex flex-column rounded" style="overflow:hidden">
-                        <div class="msg-out-info d-flex justify-content-between py-2 px-3">
-                            <span class="msg-username">
-                                Username
-                            </span>
-                            <span class="msg-timestamp ml-3">
-                                <small>
-                                    4:27 PM
-                                </small>
-                            </span>
-                        </div>
-                        <div class="msg-content py-2 px-3">
-                            Hello robot
-                        </div>
-                    </div>
-                    <div class="pl-3 pt-1 msg-seen-timestamp">
-                        <small>Seen 4:27pm</small>
-                    </div>
-                </div>
+
+        <div
+            *ngIf="isConversationSeen()"
+            class="d-flex justify-content-end msg-seen-container">
+            <div class="pl-3 msg-seen-timestamp">
+                <small>Seen {{ getLastMessage().dateSeen | date:'shortTime' }}</small>
             </div>
-        </li>
+        </div>
+
     </ul>
 </div>
 
-<div class="py-1 flex-shrink-0">
-    <p class="m-0 text-muted text-center">
-        <small>Reverse bot is typing...</small>
+<div class="flex-shrink-0 is-typing-container">
+    <p
+        *ngIf="userIsTyping"
+        class="m-0 text-muted text-center is-typing-text">
+        <small>{{ selectedConversation.user.name }} is typing...</small>
     </p>
 </div>
 
 <div class="px-3 pb-3 d-flex flex-shrink-0">
     <div class="flex-grow-1">
-        <input class="form-control" type="text" placeholder="Start chatting!">
+        <input
+            (keydown)="onKeyDown($event)"
+            [(ngModel)]="messageInput"
+            class="form-control"
+            type="text"
+            placeholder="Start chatting!"/>
     </div>
     <div>
-        <button class="btn btn-primary ml-3">Send message</button>
+        <button (click)="sendMessage()" class="btn btn-primary ml-3">Send message</button>
     </div>
 </div>

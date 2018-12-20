@@ -16,40 +16,6 @@ export class WebsocketService {
     this._socket = io(environment.socket_server_url, { query: { userName } });
   }
 
-  // getMessagesSubject(): Subject<ChatMessage> {
-  //   const observable = new Observable(observer => {
-  //     this._socket.on('new message', (msg: ChatMessage) => {
-  //       observer.next(msg);
-  //     });
-  //     return () => { this._socket.disconnect() }
-  //   });
-  
-  //   const observer = {
-  //     next: (msg: ChatMessage) => {
-  //         this._socket.emit('message', msg);
-  //     }
-  //   };
-
-  //   return Subject.create(observer, observable);
-  // }
-
-  // getTypingEventSubject(): Subject<any> {
-  //   const observable = new Observable(observer => {
-  //     this._socket.on('user typing', (userId: number) => {
-  //       observer.next(userId);
-  //     });
-  //     return () => { this._socket.disconnect() }
-  //   });
-  
-  //   const observer = {
-  //     next: (targetId: number) => {
-  //         this._socket.emit('typing', targetId);
-  //     }
-  //   };
-
-  //   return Subject.create(observer, observable);
-  // }
-
   getMessagesSubject(): Subject<ChatMessage> {
     const subject = new Subject<ChatMessage>();
 

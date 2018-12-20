@@ -2,6 +2,28 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Message = mongoose.model('Message');
 
+
+const authWithSecret = async function(secret, socketId) {
+    const user = await User.findOne({ secret });
+    if (!user) {
+        return null;
+    }
+    user.socketId = socketId;
+    user.isOnline = true;
+    await user.save();
+    return user;
+}
+
+const authWithUserName = async function(userName, socketId) {
+    const user = new User();
+
+    user.generateIdentity(userName);
+    user.socketId = socketId;
+    await user.save();
+
+    return user;
+}
+
 exports.init = (http) => {
     const io = require('socket.io')(http, {
         pingInterval: 10000,
@@ -9,21 +31,28 @@ exports.init = (http) => {
     });
     
     io.on('connection', async socket => {
-        const { userName } = socket.handshake.query;
-        if (!userName) {
-            console.log('attempt to connect without name');
+        const { userName, secret } = socket.handshake.query;
+        let self = null;
+
+        if (secret) {
+            const user = await authWithSecret(secret, socket.id);
+            if (user === null) {
+                console.log('authentication error, invalid secret');
+                return;
+            } else {
+                console.log(`${user.name} connected to chat`);
+                self = user;
+                socket.broadcast.emit('new user connected', self.toChatUserJSON());
+            }
+        } else if (userName) {
+            console.log(`${userName} connected to chat`);
+            self = await authWithUserName(userName, socket.id);
+            socket.broadcast.emit('new user connected', self.toChatUserJSON());
+        } else {
+            console.log('attempt to connect without a name or secret');
             socket.disconnect();
             return;
         };
-
-        console.log(`${userName} connected to chat`);
-
-        const self = new User();
-        self.generateIdentity(userName);
-        self.socketId = socket.id;
-        await self.save();
-
-        socket.broadcast.emit('new user connected', self.toChatUserJSON());
 
         socket.on('get users', async () => {
             try {

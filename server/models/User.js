@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     socketId: String,
-    name: { type: String, required: [true, "is requiredfield"], match: [/^[a-zA-Z0-9_\- ]+$/, 'is invalid'], index: true },
+    name: { type: String, required: [true, "is requiredfield"], index: true },
     avatar: String,
     bio: String,
-    isOnline: Boolean
+    isOnline: Boolean,
+    secret: String // For authentication purposes, used by bots
 }, { timestamps: true });
 
 UserSchema.methods.generateIdentity = function(name) {
@@ -23,7 +24,8 @@ UserSchema.methods.toChatUserJSON = function() {
         avatar: this.avatar,
         name: this.name,
         bio: this.bio,
-        isOnline: this.isOnline
+        isOnline: this.isOnline,
+        isBot: !!this.secret
     }
 }
 

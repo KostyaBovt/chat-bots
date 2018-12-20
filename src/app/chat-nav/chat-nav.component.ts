@@ -52,8 +52,6 @@ export class ChatNavComponent implements OnInit {
     
     this.conversationService.searchConversations(this.searchTerms);
 
-    console.log(this.showOnline, this.showSearchResults);
-
   }
 
   conversationsToShow(): Conversation[] {

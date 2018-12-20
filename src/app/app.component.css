@@ -9,6 +9,7 @@
 .chat-main {
     height: 705px;
     background-color: #FFF;
+    overflow: hidden;
 }
 
 .chat-window {

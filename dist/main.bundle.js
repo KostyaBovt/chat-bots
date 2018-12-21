@@ -662,7 +662,7 @@ var ConversationService = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WebsocketService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__environments_environment_prod__ = __webpack_require__("./src/environments/environment.prod.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__("./node_modules/socket.io-client/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("./node_modules/rxjs/Rx.js");
@@ -684,7 +684,7 @@ var WebsocketService = /** @class */ (function () {
     function WebsocketService() {
     }
     WebsocketService.prototype.connect = function (userName) {
-        this._socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(__WEBPACK_IMPORTED_MODULE_1__environments_environment__["a" /* environment */].socket_server_url, { query: { userName: userName } });
+        this._socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__(__WEBPACK_IMPORTED_MODULE_1__environments_environment_prod__["a" /* environment */].socket_server_url, { query: { userName: userName } });
     };
     WebsocketService.prototype.getMessagesSubject = function () {
         var subject = new __WEBPACK_IMPORTED_MODULE_3_rxjs__["Subject"]();
@@ -758,23 +758,6 @@ var WebsocketService = /** @class */ (function () {
 var environment = {
     production: true,
     socket_server_url: 'http://104.248.47.235:3000'
-};
-
-
-/***/ }),
-
-/***/ "./src/environments/environment.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-var environment = {
-    production: false,
-    socket_server_url: 'http://localhost:3000'
 };
 
 

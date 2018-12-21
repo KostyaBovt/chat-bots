@@ -6,13 +6,11 @@ module.exports = function() {
 
         socket: null,
 
-        connect: function({ name, secret }) {
+        connect: function({ secret }) {
             if (this.socket === null) {
-                console.log('bot connecting to server');
-                this.name = name;
                 this.socket = io('http://localhost:3000', {
                     forceNew: true,
-                    query: { name, secret }
+                    query: { secret }
                 });
             }
         },

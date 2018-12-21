@@ -5,6 +5,7 @@ const config = {
 exports.init = function() {
     const ignoreBot = require('./BaseBot')();
     
+    console.log('Ignore Bot connecting to server...');
     ignoreBot.init({ secret: config.secret });
 
     ignoreBot.onMessage(message => {

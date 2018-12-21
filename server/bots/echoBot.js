@@ -5,6 +5,7 @@ const config = {
 exports.init = function() {
     const echoBot = require('./BaseBot')();
     
+    console.log('Echo Bot connecting to server...');
     echoBot.init({ secret: config.secret });
 
     echoBot.onMessage(message => {

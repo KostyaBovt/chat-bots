@@ -7,6 +7,7 @@ exports.init = function() {
 
     const spamList = [];
     
+    console.log('Spam Bot connecting to server...');
     spamBot.init({ secret: config.secret });
 
     spamBot.onUserConnectedEvent(user => {

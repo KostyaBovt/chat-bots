@@ -1,7 +1,10 @@
 <div class="msg-container">
-    <div class="shadow-sm d-flex flex-column rounded" style="overflow:hidden">
+    <div
+        class="shadow-sm d-flex flex-column rounded"
+        [class.msg-in]="msg.isIncoming"
+        [class.msg-out]="!msg.isIncoming">
         <div
-            class="msg-out-info d-flex justify-content-between py-2 px-3"
+            class="py-2 px-3 d-flex justify-content-between rounded-top msg-out-info"
             [class.msg-out-info]="!msg.isIncoming"
             [class.msg-in-info]="msg.isIncoming">
             <span class="msg-username">
@@ -13,7 +16,8 @@
                 </small>
             </span>
         </div>
-        <div class="msg-content py-2 px-3">
+        <div
+        class="py-2 px-3 rounded-bottom msg-content">
           {{ msg.content }}
         </div>
     </div>

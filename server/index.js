@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const http = require('http').Server(app);
 
-mongoose.set('useCreateIndex', true)
-mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/chat_bots', { useNewUrlParser: true })
+mongoose.set('useCreateIndex', true);
+mongoose.connect('mongodb://localhost/chat_bots', { useNewUrlParser: true });
 
 require('./models/User');
 require('./models/Message');

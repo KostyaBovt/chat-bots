@@ -5,6 +5,7 @@ const config = {
 exports.init = function() {
     const reverseBot = require('./BaseBot')();
     
+    console.log('Reverse Bot connecting to server...');
     reverseBot.init({ secret: config.secret });
 
     reverseBot.onMessage(message => {

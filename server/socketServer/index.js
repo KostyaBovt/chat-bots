@@ -82,7 +82,6 @@ exports.init = (http) => {
         });
 
         socket.on('message', async (message) => {
-            console.log('massage was emited', message);
             const { dateSent, content, targetId } = message;
             const target = await User.findById(targetId);
 
@@ -99,8 +98,6 @@ exports.init = (http) => {
             await messageToSend.save();
 
             socket.to(target.socketId).emit('new message', messageToSend.toInChatMessageJSON());
-            
-            console.log('Message was sent to', target);
         });
 
         socket.on('typing', async (targetId) => {

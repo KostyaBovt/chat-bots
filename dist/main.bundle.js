@@ -757,7 +757,7 @@ var WebsocketService = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    socket_server_url: 'http://localhost:3000'
+    socket_server_url: 'http://104.248.47.235:3000'
 };
 
 

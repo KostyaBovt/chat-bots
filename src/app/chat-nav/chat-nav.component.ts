@@ -65,7 +65,6 @@ export class ChatNavComponent implements OnInit {
   }
   
   search(term: string) {
-    console.log('attempt to search', term);
     if (term === '') {
       this.showSearchResults = false;
     } else {

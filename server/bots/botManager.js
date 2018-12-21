@@ -33,11 +33,14 @@ const bots = [
 ];
 
 exports.importBotsToDB = function(callback) {
-    User.collection.insertMany(bots, (err, result) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, result)
-        }
+    User.collection.deleteMany({}, (err, result) => {
+        console.log('cleaned up the db', result);
+        User.collection.insertMany(bots, (err, result) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result)
+            }
+        });
     });
 }

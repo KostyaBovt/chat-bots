@@ -75,7 +75,6 @@ export class ConversationService {
   }
 
   private trigerSearch(name: string): void {
-    console.log('searching for', name);
     const pattern = new RegExp(name, 'i');
     const result = this._conversations.filter(conv => conv.user.name.match(pattern));
     this.searchResults.next(result);
